@@ -1,0 +1,109 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: #451212;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bolas-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #945d5d;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.bolas-resposta-container {
+  align-items: center;
+  padding: 20px;
+  background-color: #945d5d;
+}
+
+.bola {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: background-color 0.3s ease;
+}
+
+.bolar {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.teclado-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.teclado {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #5dc79a;
+}
+
+.tecla {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.vermelha { background-color: red; }
+.verde { background-color: green; }
+.azul { background-color: blue; }
+.amarela { background-color: yellow; }
+.laranja { background-color: orange; }
+
+.submit-container {
+
+}
+
+.submit {
+
+  font-size: 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.controle {
+  position: fixed;
+  width: 90%;
+  bottom: 20px; /* Distância do fundo da tela */
+  left: 20px; /* Distância da esquerda da tela */
+  display: flex;
+  align-items: center;
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px; /* Ajuste conforme necessário para a posição vertical desejada */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%);
+  z-index: 1000; /* Certifica-se de que a mensagem flutuante esteja acima de todo o conteúdo */
+  pointer-events: none; /* Evita que a mensagem flutuante capture eventos do mouse */
+  width: 300px; /* Largura desejada */
+}
+
+.toast-body {
+  font-size: 18px; /* Tamanho da fonte desejado */
+}
