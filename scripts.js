@@ -38,14 +38,7 @@ teclas.forEach((tecla, index) => {
   tecla.addEventListener('click', () => {
     corSelecionada = getComputedStyle(tecla).backgroundColor; // Atualizando a cor selecionada com a cor da tecla clicada
     if(bolaSelecionada == null){
-        // Seleciona o elemento do toast
-        var toastElement = document.getElementById('mensagem-flutuante-bola');
-
-        // Cria uma instância de Toast do Bootstrap
-        var toast = new bootstrap.Toast(toastElement);
-
-        // Chama o método show() para exibir a mensagem flutuante
-        toast.show();
+        console.log("Selecione uma bola");
     } else {
         bolas[bolaSelecionada].style.backgroundColor = corSelecionada;
         tentativa[bolaSelecionada] = retornaCor(corSelecionada);
@@ -104,14 +97,7 @@ document.getElementById("try").addEventListener("click", verificar);
 function verificar() {
     for (let i = 0; i < tentativa.length; i++) {
         if (tentativa[i] === null) {
-            // Seleciona o elemento do toast
-            var toastElement = document.getElementById('mensagem-flutuante-selecao');
-
-            // Cria uma instância de Toast do Bootstrap
-            var toast = new bootstrap.Toast(toastElement);
-
-            // Chama o método show() para exibir a mensagem flutuante
-            toast.show();
+            console.log("Selecione uma bola");
 
             return;
         }
@@ -146,11 +132,11 @@ function verificar() {
     pintaResposta(vermelhos, brancos);
 
     if(vermelhos >= 4)
-        abrirModalErro("Parabens, você venceu!!");
+        console.log("Ganhou");
 
     tentativaAtual++;
     if(tentativaAtual >= 11)
-        abrirModalErro("Você perdeu :(");
+        console.log("Perdeu");
     zeraSelecao();
     atribuirBolas(tentativaAtual);
 }
@@ -166,18 +152,3 @@ function pintaResposta(V, B){
     for(; i < 4; i++)
         bolasr[i].style.backgroundColor = 'black';
 }
-
-function abrirModalErro(mensagem) {
-    var modalErro = new bootstrap.Modal(document.getElementById('mensagem-modal'), {
-      backdrop: 'static', // Backdrop estático
-      keyboard: false // Desativar fechar com a tecla Esc
-    });
-    var mensagemErro = document.getElementById('mensagemErro');
-    mensagemErro.innerText = mensagem; // Define o texto da mensagem de erro
-    modalErro.show(); // Mostra o modal de erro
-    }
-
-    // Exemplo de como chamar a função de abrir o modal de erro
-    document.getElementById('btnAbrirModal').addEventListener('click', function() {
-    abrirModalErro('Aqui está a mensagem de erro que ocupa quase toda a tela e trava todo o resto do conteúdo.');
-});
