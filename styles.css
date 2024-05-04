@@ -1,7 +1,7 @@
 html {
 	width: 100%;
-	background-color: #E5E5E5;
-	color: #263138;
+	background-color: #3C3C3C;
+	color: #F5F5F5;
 	font-weight: 600;
 }
 
@@ -11,12 +11,23 @@ body{
 
 main {
 	width: 100%;
- 	background-color: yellow;
+ 	background-color: #3C3C3C;
+ 	color: #F5F5F5;
 }
 
 header {
-	background-color: black;
+	background-color: #F5F5F5;
+	color: #3C3C3C;
 	height: 3em;
+}
+
+.menu-logo img {
+    height: 2em; /* Define a largura da imagem como 100% */
+    width: auto; /* Mantém a proporção original da imagem */
+}
+
+.row {
+	margin: 0px;
 }
 
 .titulo {
@@ -24,14 +35,18 @@ header {
 	margin: 0px;
 }
 
+.titulo > * {
+	padding: 8px;
+}
+
 .jogo {
 	width: 100%;
 	margin: 0px;
-	background-color: black;
+	background-color: #3C3C3C;
 }
 
 @media (max-width: 300px) {
-	.titulo{
+	.titulo .janela{
 		margin: 0px;
 		width: 100%;
 	}
@@ -52,7 +67,7 @@ header {
 }
 
 @media (min-width: 300px) and (max-width: 720px) {
-	.titulo{
+	.titulo, .janela{
 		width: 100%;
 		margin: 0px;
 	}
@@ -63,7 +78,7 @@ header {
 		max-width: 720px;
 		margin: 0 auto;
 	}
-	.titulo{
+	.titulo, .janela{
 		max-width: 720px;
 		margin: auto;
 	}
@@ -73,6 +88,10 @@ header {
 	}
 	header {
 		height: 65px;
+	}
+	.menu-logo img {
+	    height: 51px; /* Define a largura da imagem como 100% */
+	    width: auto; /* Mantém a proporção original da imagem */
 	}
 }
 
@@ -81,7 +100,7 @@ header {
 		max-width: 1440px;
 		margin: 0 auto;
 	}
-	.titulo{
+	.titulo, .janela{
 		max-width: 720px;
 		margin: auto;
 	}
@@ -91,6 +110,10 @@ header {
 	}
 	header {
 		height: 65px;
+	}
+	.menu-logo img {
+	    height: 57px; /* Define a largura da imagem como 100% */
+	    width: auto; /* Mantém a proporção original da imagem */
 	}
 }
 
@@ -221,13 +244,22 @@ header {
 	height: 100%;
 }
 
+.menu > * {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
 .menu-logo {
-	text-align: center;
+	display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center; /* Alinha horizontalmente ao centro */
 }
 
 .janela {
 	width: 100%;
-	height: 6vh;
+	min-height: 6vh;
+	padding-right: 8px;
+	padding-left: 8px;
 }
 
 .tabuleiro {
@@ -265,11 +297,11 @@ footer {
 	height: 70px;
 }
 
-.vermelha { background-color: red; }
-.verde { background-color: green; }
-.azul { background-color: blue; }
-.amarela { background-color: yellow; }
-.laranja { background-color: orange; }
+.vermelha { background-color: #000938; }
+.verde { background-color: #A37700; }
+.azul { background-color: #004705; }
+.amarela { background-color: #B22F0E; }
+.laranja { background-color: #470B15; }
 .submit { background-color: black; }
 
 .submit-container {
@@ -284,5 +316,107 @@ footer {
 	text-align: center;
 	display: flex;
     align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center;
+}
+
+.bolal {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+}
+
+.v {
+	background-color: #cf0c0c;
+}
+
+.b {
+	background-color: #F5F5F5;
+}
+
+.p {
+	background-color: black;
+}
+
+p {
+	margin-bottom: 3px;
+	font-size: 14px;
+}
+
+.janela > .row > *{
+	padding: 0px;
+}
+
+.info {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.como-jogar {
+	display: flex;
+    align-items: center;
+}
+
+.refresh {
+	background-color: #F5F5F5;
+	border-radius: 50%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refres > p{
+	font-size: 11px;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Mantém a cor padrão do texto */
+    /* Outros estilos que você queira remover */
+}
+
+#mensagem-selecionar, #mensagem-try, #mensagem-fim, #mensagem-correta {
+	color: white;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(207, 12, 12);
+    border-radius: 15px;
+    height: 40px;
+    width: 300px;
+    transition: ;
+    opacity: 1; /* Inicialmente invisível */
+    display: block;
+    transition: opacity 2s ease;
+    text-align: center;
+    line-height: 40px; /* Alinha o texto verticalmente */
+}
+
+#mensagem-correta {
+	top: 80%;
+    left: 50%;
+    background-color: #F5F5F5;
+    color: black;
+}
+
+#mensagem-correta > .row > *{
+	padding: 0px;
+	text-align: left;
+}
+
+.bolac0, .bolac1, .bolac2, .bolac3 {
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+}
+
+#mensagem-correta > .row {
+	display: flex;
+    align-items: center;
     justify-content: center;
 }
