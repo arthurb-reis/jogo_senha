@@ -1,68 +1,268 @@
-body, html {
-  height: 100%;
-  margin: 0;
-  background-color: #451212;
+html {
+	width: 100%;
+	background-color: #E5E5E5;
+	color: #263138;
+	font-weight: 600;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+body{
+	width: 100%;
 }
 
-.bolas-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-  background-color: #945d5d;
-  padding-left: 0px;
-  padding-right: 0px;
+main {
+	width: 100%;
+ 	background-color: yellow;
 }
 
-.bolas-resposta-container {
-  align-items: center;
-  padding: 20px;
-  background-color: #945d5d;
+header {
+	background-color: black;
+	height: 3em;
+}
+
+.titulo {
+	height: 6vh;
+	margin: 0px;
+}
+
+.jogo {
+	width: 100%;
+	margin: 0px;
+	background-color: black;
+}
+
+@media (max-width: 300px) {
+	.titulo{
+		margin: 0px;
+		width: 100%;
+	}
+}
+
+@media (min-width: 300px) and (max-width: 510px) {
+	.jogo{
+		width: 100%;
+		margin: 0px;
+	}
+}
+
+@media (min-width: 510px) and (max-width: 720px) {
+	.jogo{
+		width: 510px;
+		margin: auto;
+	}
+}
+
+@media (min-width: 300px) and (max-width: 720px) {
+	.titulo{
+		width: 100%;
+		margin: 0px;
+	}
+}
+
+@media (min-width: 576px) and (max-width: 1199.98px) {
+	html{
+		max-width: 720px;
+		margin: 0 auto;
+	}
+	.titulo{
+		max-width: 720px;
+		margin: auto;
+	}
+	.jogo{
+		width: 510px;
+		margin: auto;
+	}
+	header {
+		height: 65px;
+	}
+}
+
+@media (min-width: 1200px) {
+	html {
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+	.titulo{
+		max-width: 720px;
+		margin: auto;
+	}
+	.jogo{
+		width: 510px;
+		margin: auto;
+	}
+	header {
+		height: 65px;
+	}
 }
 
 .bola {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: gray;
-  transition: background-color 0.3s ease;
+	border-radius: 50%;
+	background-color: grey;
+	transition: background-color 0.3s ease;
 }
 
 .bolar {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background-color: gray;
-  transition: background-color 0.3s ease;
-  margin: 5px;
+	border-radius: 50%;
+	background-color: grey;
+	transition: background-color 0.5s ease;
 }
 
-.teclado-container {
-  flex-grow: 1;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10px;
+@media (max-width: 510px) {
+	.bola {
+		width: calc( (100vw/6) - 8px );
+		height: calc( (100vw/6) - 8px );
+	}
+
+	.bolar {
+		width: calc( (100vw/12) - 4px);
+		height: calc( (100vw/12) - 4px);
+	}
+	.bolas-resposta-container > .row > .c1{
+		padding-left: calc(0.1 * (300vw / 12) );
+	}
+	.bolas-resposta-container > .l1{
+		padding-bottom: 4px;
+	}
+
+	.tecla {
+		width: 10vw;
+		height: 10vw;
+		border-radius: 50%;
+		margin: 1vw;
+		cursor: pointer;
+	}
+
+	.teclat {
+		width: 10vw;
+		height: 10vw;
+		border-radius: 50%;
+		margin: 1vw;
+		cursor: pointer;
+	}
+
+	.teclado {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		background-color: #5dc79a;
+		margin: 0px;
+	}
+
+	.teclado-container {
+		position: fixed;
+		width: 100vw;
+		bottom: 0px; /* Distância do fundo da tela */
+		right: 0px; /* Distância da esquerda da tela */
+		display: flex;
+		align-items: center;
+	}
+
+	.submit {
+		font-size: calc((100vw/510) * 16);
+	}
+
 }
 
-.teclado {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  background-color: #5dc79a;
+@media (min-width: 510px) {
+	.bola {
+		width: 77px;
+		height: 77px;
+	}
+	.bolar{
+		width: 34px;
+		height: 34px;
+	}
+	.bolas-resposta-container > .l1{
+		padding-bottom: 9px;
+	}
+
+	.bolas-resposta-container > .row > .c1{
+		padding-left: 13px;
+	}
+
+	.tecla {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		margin: 5px;
+		cursor: pointer;
+	}
+
+	.teclat {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		margin: 5px;
+		cursor: pointer;
+	}
+
+	.teclado {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		background-color: #5dc79a;
+		margin: 0px;
+	}
+
+	.teclado-container {
+		position: fixed;
+		width: 510px;
+		bottom: 0px; /* Distância do fundo da tela */
+		right: 0px; /* Distância da esquerda da tela */
+		display: flex;
+		align-items: center;
+	}
+	.submit {
+		font-size: 16;
+	}
 }
 
-.tecla {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: 5px;
-  cursor: pointer;
+.menu {
+	margin: 0px;
+	height: 100%;
+}
+
+.menu-logo {
+	text-align: center;
+}
+
+.janela {
+	width: 100%;
+	height: 6vh;
+}
+
+.tabuleiro {
+	padding-top: 30px;
+}
+
+.bolas-container {
+	margin: 0px;
+	padding: 0px;
+}
+
+.bolas-container > .row {
+	margin: 0px;
+}
+
+.tabuleiro > * > .row {
+	margin: 0px;
+	padding-bottom: 25px;
+}
+
+.tabuleiro .row{
+	margin: 0px;
+}
+
+.jogo .row > *{
+	padding: 0px;
+}
+
+.bolas-container > .row  > *{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+footer {
+	height: 70px;
 }
 
 .vermelha { background-color: red; }
@@ -70,40 +270,19 @@ body, html {
 .azul { background-color: blue; }
 .amarela { background-color: yellow; }
 .laranja { background-color: orange; }
+.submit { background-color: black; }
 
 .submit-container {
-
+    display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    padding: 0px;
 }
 
 .submit {
-
-  font-size: 20px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.controle {
-  position: fixed;
-  width: 90%;
-  bottom: 20px; /* Distância do fundo da tela */
-  left: 20px; /* Distância da esquerda da tela */
-  display: flex;
-  align-items: center;
-}
-
-.toast-container {
-  position: fixed;
-  top: 20px; /* Ajuste conforme necessário para a posição vertical desejada */
-  left: 50%; /* Centraliza horizontalmente */
-  transform: translateX(-50%);
-  z-index: 1000; /* Certifica-se de que a mensagem flutuante esteja acima de todo o conteúdo */
-  pointer-events: none; /* Evita que a mensagem flutuante capture eventos do mouse */
-  width: 300px; /* Largura desejada */
-}
-
-.toast-body {
-  font-size: 18px; /* Tamanho da fonte desejado */
+	color: white;
+	text-align: center;
+	display: flex;
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center;
 }
