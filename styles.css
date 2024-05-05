@@ -45,7 +45,7 @@ header {
 	background-color: #3C3C3C;
 }
 
-.limpar {
+.limpar, .bs {
 	background-color: #F5F5F5;
 	display: flex;
     align-items: center;
@@ -181,14 +181,21 @@ header {
 		margin: 0px;
 	}
 
-	.limpar {
+	.limpar, .bs {
 		position: fixed;
 		width: 25vw;
 		height: 10vw;
 		bottom: 13vw; /* Distância do fundo da tela: 12vw ele fica colado com o teclado*/
-		right: 0px; /* Distância da esquerda da tela */
 		display: flex;
 		align-items: center;
+	}
+
+	.bs {
+		right: 0px; /* Distância da esquerda da tela */
+	}
+
+	.limpar {
+		right: 25vw; /* Distância da esquerda da tela */
 	}
 
 	.teclado-container {
@@ -251,14 +258,22 @@ header {
 		margin: 0px;
 	}
 
-	.limpar {
+	.limpar, .bs {
 		position: fixed;
 		width: 90px;
 		height: 50px;
 		bottom: 65px; /* Distância do fundo da tela: 60px ele fica colado com o teclado*/
-		right: 5px; /* Distância da esquerda da tela */
 		display: flex;
 		align-items: center;
+		cursor: pointer;
+	}
+
+	.bs {
+		right: 5px; /* Distância da esquerda da tela */
+	}
+
+	.limpar {
+		right: 100px;
 	}
 
 	.teclado-container {
@@ -269,7 +284,7 @@ header {
 		display: flex;
 		align-items: center;
 	}
-	.submit, .limpar {
+	.submit, .limpar, .bs {
 		font-size: 16;
 	}
 }
