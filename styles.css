@@ -45,6 +45,16 @@ header {
 	background-color: #3C3C3C;
 }
 
+.limpar {
+	background-color: #F5F5F5;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3C3C3C;
+    border: 2px solid black;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 300px) {
 	.titulo .janela{
 		margin: 0px;
@@ -120,7 +130,8 @@ header {
 .bola {
 	border-radius: 50%;
 	background-color: grey;
-	transition: background-color 0.3s ease;
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	border: 2px solid transparent;
 }
 
 .bolar {
@@ -170,6 +181,16 @@ header {
 		margin: 0px;
 	}
 
+	.limpar {
+		position: fixed;
+		width: 25vw;
+		height: 10vw;
+		bottom: 13vw; /* Distância do fundo da tela: 12vw ele fica colado com o teclado*/
+		right: 0px; /* Distância da esquerda da tela */
+		display: flex;
+		align-items: center;
+	}
+
 	.teclado-container {
 		position: fixed;
 		width: 100vw;
@@ -181,6 +202,10 @@ header {
 
 	.submit {
 		font-size: calc((100vw/510) * 16);
+	}
+
+	.limpar {
+		font-size: calc((100vw/510) * 22);
 	}
 
 }
@@ -226,6 +251,16 @@ header {
 		margin: 0px;
 	}
 
+	.limpar {
+		position: fixed;
+		width: 90px;
+		height: 50px;
+		bottom: 65px; /* Distância do fundo da tela: 60px ele fica colado com o teclado*/
+		right: 5px; /* Distância da esquerda da tela */
+		display: flex;
+		align-items: center;
+	}
+
 	.teclado-container {
 		position: fixed;
 		width: 510px;
@@ -234,7 +269,7 @@ header {
 		display: flex;
 		align-items: center;
 	}
-	.submit {
+	.submit, .limpar {
 		font-size: 16;
 	}
 }
@@ -317,6 +352,8 @@ footer {
 	display: flex;
     align-items: center; /* Alinha verticalmente ao centro */
     justify-content: center;
+    transition: border-color 0.3s ease;
+	border: 5px solid transparent;
 }
 
 .bolal {
@@ -379,7 +416,7 @@ a:active {
     /* Outros estilos que você queira remover */
 }
 
-#mensagem-selecionar, #mensagem-try, #mensagem-fim, #mensagem-correta {
+#mensagem-selecionar, #mensagem-try, #mensagem-fim, #mensagem-correta, #mensagem-ok {
 	color: white;
     position: fixed;
     top: 15%;
