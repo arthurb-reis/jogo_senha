@@ -7,9 +7,12 @@ var emJogo = true;
 
 var bolas;
 const teclas = document.querySelectorAll('.tecla');
+const limpar = document.querySelectorAll('.limpar');
 
-let corSelecionada = ''; // Variável para armazenar a cor selecionada
 var bolaSelecionada = null; // Variável para armazenar a bola selecionada
+
+var ok = document.getElementById("try");
+ok.addEventListener("click", verificar);
 
 function atribuirBolas(tentativaAtual) {
     bolas = document.querySelectorAll('.jogada' + tentativaAtual + ' .bola');
@@ -32,40 +35,75 @@ document.addEventListener('DOMContentLoaded', function() {
   emJogo = true;
 });
 
+limpar[0].addEventListener('click', () => {
+    zerarCor();
+    tentativa = [null, null, null, null];
+    zeraSelecao();
+    seleciona(0);
+});
+
+function zerarCor() {
+    bolas.forEach((bola, index) => {
+        bola.style.backgroundColor = 'grey';  
+    });
+};
+
 // Adicionando observador de eventos para cada classe de bola do teclado
 teclas.forEach((tecla, index) => {
   tecla.addEventListener('click', () => {
+    let corSelecionada = ''; // Variável para armazenar a cor selecionada
     if(!emJogo){
         mostrarMensagem("mensagem-fim");
         return;
     }
     corSelecionada = getComputedStyle(tecla).backgroundColor; // Atualizando a cor selecionada com a cor da tecla clicada
     if(bolaSelecionada == null){
-        mostrarMensagem("mensagem-selecionar");
+        if(!tentativa.includes(null)){
+            mostrarMensagem("mensagem-ok");
+            ok.style.borderColor = 'red';
+            setTimeout(function() {
+                ok.style.borderColor = 'transparent';
+            }, 1000);
+        } else{
+            mostrarMensagem("mensagem-selecionar");
+        }
     } else {
         bolas[bolaSelecionada].style.backgroundColor = corSelecionada;
         tentativa[bolaSelecionada] = retornaCor(corSelecionada);
-        seleciona(bolaSelecionada + 1);
+        for(var i = bolaSelecionada + 1; i < 4; i++){
+            if(tentativa[i] === null){
+                seleciona(i);
+                return;
+            }
+        }
+        for(var i = 0; i <= bolaSelecionada; i++){
+            if(tentativa[i] === null){
+                seleciona(i);
+                return;
+            }
+        }
+        seleciona(5);
     }
   });
 });
 
-document.body.addEventListener('click', (event) => {
+/*document.body.addEventListener('click', (event) => {
   // Verifica se o clique ocorreu fora das bolas e teclas
   if (emJogo && !Array.from(bolas).includes(event.target) && !event.target.closest('.teclado-container') && !event.target.closest('.submit-container')) {
     zeraSelecao();
   }
-});
+});*/
 
 function zeraSelecao(){
     if(bolaSelecionada !== null && emJogo){
-        var corRGBA = getComputedStyle(bolas[bolaSelecionada]).backgroundColor;
-        if (corRGBA.includes('rgba')) {
+        //var corRGBA = getComputedStyle(bolas[bolaSelecionada]).backgroundColor;
+        bolas[bolaSelecionada].style.borderColor = 'transparent';
+        /*if (corRGBA.includes('rgba')) {
             var corRGB = corRGBA.replace(/,\s*\d+(\.\d+)?\s*\)/, ')').replace('rgba', 'rgb');
             bolas[bolaSelecionada].style.backgroundColor = corRGB;
         } else {
             bolas[bolaSelecionada].style.backgroundColor = corRGBA;
-        }
+        }*/
         bolaSelecionada = null;
     }
 }
@@ -74,16 +112,18 @@ function seleciona(index){
     if(!emJogo)
         return;
     if(index < 4){
-        var corRGB = getComputedStyle(bolas[index]).backgroundColor;
-        if(!corRGB.includes('rgba')){
+        zeraSelecao();
+        //var corRGB = getComputedStyle(bolas[index]).backgroundColor;
+        bolas[index].style.borderColor = 'white';
+        /*if(!corRGB.includes('rgba')){
             var indiceUltimoNumero = corRGB.lastIndexOf(')'); // Encontra o índice da última vírgula
             var corRGBA = corRGB.slice(0, indiceUltimoNumero) + ', 0.6' + corRGB.slice(indiceUltimoNumero);
             // Torna a bola clicada um pouco mais clara
             bolas[index].style.backgroundColor = corRGBA.replace('rgb', 'rgba');
-        }
+        }*/
         bolaSelecionada = index; // Armazena o índice da bola selecionada
     } else {
-        bolaSelecionada = null;
+        zeraSelecao();
     }
 }
 
@@ -102,8 +142,6 @@ function retornaCor(RGB){
     return null;
 }
 
-document.getElementById("try").addEventListener("click", verificar);
-
 function verificar() {
     if(!emJogo){
         mostrarMensagem("mensagem-fim");
@@ -117,7 +155,6 @@ function verificar() {
     }
 
     // Declarar variáveis:
-    var vetorVerificacaoTent = [0, 0, 0, 0];
     var vetorVerificacaoSenha = [0, 0, 0, 0];
     var vermelhos = 0;
     var brancos = 0;
@@ -126,19 +163,19 @@ function verificar() {
     for (var i = 0; i < tentativa.length; i++) {
         if(tentativa[i] === senha[i]){
             vermelhos++;
-            vetorVerificacaoTent[i] = 1;
             vetorVerificacaoSenha[i] = 1;
         }
     }
 
-    for (var i = 0; i < senha.length; i++) {
-        if(vetorVerificacaoSenha[i] === 0){
-            for(var j = 0; j < tentativa.length; j++)
-                if(vetorVerificacaoTent[j] == 0 && tentativa[j] === senha[i]){
-                    vetorVerificacaoSenha[i] = 2;
-                    vetorVerificacaoTent[j] = 2;
-                    brancos++;
-                }
+    for (var i = 0; i < tentativa.length; i++) {
+        if(vetorVerificacaoSenha[i] === 1)
+            continue;
+        for(var j = 0; j < senha.length; j++){
+            if(vetorVerificacaoSenha[j] === 0 && tentativa[i] === senha[j] && i !== j){
+                brancos++;
+                vetorVerificacaoSenha[j] = 2;
+                break;
+            }
         }
     }
 
@@ -147,15 +184,17 @@ function verificar() {
     if(vermelhos >= 4){
         mostrarMensagemFim('#mensagemModalWin');
         emJogo = false;
+    } else {
+        tentativaAtual++;
+        tentativa = [null, null, null, null];
+        if(tentativaAtual >= 11){
+            mostrarMensagemFim('#mensagemModal');
+            emJogo = false;
+            pintaSenhaCorreta();
+            mostrarMensagemCorreta();
+        }
     }
-
-    tentativaAtual++;
-    if(tentativaAtual >= 11){
-        mostrarMensagemFim('#mensagemModal');
-        emJogo = false;
-        pintaSenhaCorreta();
-        mostrarMensagemCorreta();
-    }
+    
     zeraSelecao();
     bolas = null;
     atribuirBolas(tentativaAtual);
@@ -182,12 +221,22 @@ function embaralha(){
         
         // Garante que o valor aleatório não seja igual aos últimos dois elementos
         do {
-            valorAleatorio = Math.floor(Math.random() * 5).toString(); // Gera um valor aleatório entre 0 e 3
-        } while (i >= 2 && valorAleatorio === senha[i - 1] && valorAleatorio === senha[i - 2]);
+            valorAleatorio = Math.floor(Math.random() * 5).toString(); // Gera um valor aleatório entre 0 e 4
+        } while (!(contarOcorrencias(valorAleatorio) < 2));
         
         senha.push(valorAleatorio);
     }
+    console.log(senha);
 }
+
+function contarOcorrencias(valor) {
+    var contador = 0;
+    for(var i = 0; i < senha.length; i++){
+        if(senha[i] === valor)
+            contador++;
+    }
+    return contador;
+};
 
 
 function mostrarMensagem(mensagem) {
