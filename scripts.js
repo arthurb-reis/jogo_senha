@@ -8,6 +8,7 @@ var emJogo = true;
 var bolas;
 const teclas = document.querySelectorAll('.tecla');
 const limpar = document.querySelectorAll('.limpar');
+const bs = document.querySelectorAll('.bs');
 
 var bolaSelecionada = null; // Variável para armazenar a bola selecionada
 
@@ -36,11 +37,52 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 limpar[0].addEventListener('click', () => {
+    if(!emJogo){
+        mostrarMensagem("mensagem-fim");
+        return;
+    }
     zerarCor();
     tentativa = [null, null, null, null];
     zeraSelecao();
     seleciona(0);
 });
+
+bs[0].addEventListener('click', () => {
+    if(!emJogo){
+        mostrarMensagem("mensagem-fim");
+        return;
+    }
+    if(bolaSelecionada !== null){
+        if(bolaSelecionada === 0){
+            del(0);
+            seleciona(0);
+        } else {
+            if(tentativa[bolaSelecionada] !== null){
+                del(bolaSelecionada);
+            } else {
+                var aux = bolaSelecionada;
+                zeraSelecao();
+                bolaSelecionada = aux - 1;
+                del(bolaSelecionada);
+                seleciona(bolaSelecionada);
+            }
+        }
+    } else {
+        for(var i = 3; i >= 0; i--){
+            if(tentativa[i] !== null){
+                del(i);
+                seleciona(i);
+                bolaSelecionada = i;
+                break;
+            }
+        }
+    }
+});
+
+function del(bola){
+    bolas[bola].style.backgroundColor = 'grey'; 
+    tentativa[bola] = null;
+}
 
 function zerarCor() {
     bolas.forEach((bola, index) => {
@@ -226,7 +268,6 @@ function embaralha(){
         
         senha.push(valorAleatorio);
     }
-    console.log(senha);
 }
 
 function contarOcorrencias(valor) {
